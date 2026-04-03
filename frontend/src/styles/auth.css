@@ -297,3 +297,61 @@
   border-color: rgba(16,185,129,0.6) !important;
   box-shadow: 0 0 0 3px rgba(16,185,129,0.1) !important;
 }
+
+/* ===== DEMO BUTTON ===== */
+.btn-demo {
+  width: 100%;
+  background: rgba(29,106,255,0.08);
+  color: #1d6aff;
+  border: 1.5px solid rgba(29,106,255,0.25);
+  border-radius: var(--radius-pill);
+  padding: 11px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-demo:hover:not(:disabled) {
+  background: rgba(29,106,255,0.14);
+  border-color: rgba(29,106,255,0.5);
+}
+.btn-demo:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.demo-hint {
+  text-align: center;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+.demo-hint span { font-family: monospace; }
+
+.field-hint-inline {
+  font-size: 11px;
+  font-weight: 400;
+  color: #94a3b8;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+}
+.auth-divider span {
+  font-size: 12px;
+  color: #94a3b8;
+}
