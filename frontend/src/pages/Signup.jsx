@@ -21,23 +21,20 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, username, email, password } = form;
-    if (!name || !username || !email || !password) {
+
+    if (!name.trim() || !username.trim() || !email.trim() || !password) {
       setError('Please fill in all fields'); return;
-    }
-    if (username.includes(' ')) {
-      setError('Username cannot contain spaces'); return;
     }
     if (password.length < 6) {
       setError('Password must be at least 6 characters'); return;
     }
 
-    setError('');
     setLoading(true);
     try {
       const { data } = await api.post('/auth/signup', {
-        name: name.trim(),
+        name:     name.trim(),
         username: username.toLowerCase().trim(),
-        email: email.toLowerCase().trim(),
+        email:    email.trim().toLowerCase(),
         password,
       });
       login(data);
@@ -66,7 +63,7 @@ export default function Signup() {
             <input
               type="text" name="name"
               className="form-control"
-              placeholder="Your full name"
+              placeholder="Your full name (2–50 chars)"
               value={form.name}
               onChange={handleChange}
               autoComplete="name"
@@ -74,11 +71,11 @@ export default function Signup() {
           </div>
 
           <div className="form-group">
-            <label>Username <span className="field-hint-inline">· no spaces, e.g. john_doe</span></label>
+            <label>Username</label>
             <input
               type="text" name="username"
               className="form-control"
-              placeholder="e.g. john_doe"
+              placeholder="e.g. john_doe or johndoe"
               value={form.username}
               onChange={handleChange}
               autoComplete="username"
@@ -98,7 +95,7 @@ export default function Signup() {
           </div>
 
           <div className="form-group">
-            <label>Password <span className="field-hint-inline">· min 6 characters</span></label>
+            <label>Password</label>
             <div className="password-wrapper">
               <input
                 type={showPassword ? 'text' : 'password'} name="password"

@@ -15,16 +15,14 @@ export default function Login() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleChange = e => {
-    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-    setError('');
-  };
-
-  const submit = async (credentials) => {
+  const doLogin = async (credentials) => {
     setError('');
     setLoading(true);
     try {
-      const { data } = await api.post('/auth/login', credentials);
+      const { data } = await api.post('/auth/login', {
+        email: credentials.email.trim().toLowerCase(),
+        password: credentials.password,
+      });
       login(data);
       toast.success('Welcome back! 👋');
       navigate('/feed');
@@ -37,13 +35,11 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.email || !form.password) { setError('Please fill in all fields'); return; }
-    submit(form);
-  };
-
-  const handleDemo = () => {
-    setForm(DEMO);
-    submit(DEMO);
+    if (!form.email.trim() || !form.password) {
+      setError('Please fill in all fields');
+      return;
+    }
+    doLogin(form);
   };
 
   return (
@@ -60,11 +56,12 @@ export default function Login() {
           <div className="form-group">
             <label>Email</label>
             <input
-              type="email" name="email"
+              type="email"
+              name="email"
               className="form-control"
-              placeholder="you@example.com"
+              placeholder="e.g. you@example.com"
               value={form.email}
-              onChange={handleChange}
+              onChange={e => { setForm(f => ({ ...f, email: e.target.value })); setError(''); }}
               autoComplete="email"
             />
           </div>
@@ -73,11 +70,12 @@ export default function Login() {
             <label>Password</label>
             <div className="password-wrapper">
               <input
-                type={showPassword ? 'text' : 'password'} name="password"
+                type={showPassword ? 'text' : 'password'}
+                name="password"
                 className="form-control"
-                placeholder="Your password"
+                placeholder="Min 6 characters"
                 value={form.password}
-                onChange={handleChange}
+                onChange={e => { setForm(f => ({ ...f, password: e.target.value })); setError(''); }}
                 autoComplete="current-password"
               />
               <button type="button" className="password-toggle" onClick={() => setShowPassword(s => !s)}>
@@ -94,13 +92,15 @@ export default function Login() {
 
         <div className="auth-divider"><span>or</span></div>
 
-        <button className="btn-demo" onClick={handleDemo} disabled={loading}>
+        <button
+          type="button"
+          className="btn-demo"
+          disabled={loading}
+          onClick={() => doLogin(DEMO)}
+        >
           ⚡ Try Demo Account
         </button>
-
-        <div className="demo-hint">
-          <span>alex@demo.com</span> · <span>demo1234</span>
-        </div>
+        <p className="demo-hint">email: alex@demo.com &nbsp;·&nbsp; password: demo1234</p>
 
         <p className="auth-switch">
           Don't have an account? <Link to="/signup">Sign up</Link>
