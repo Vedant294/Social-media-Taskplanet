@@ -43,12 +43,12 @@
   overscroll-behavior: none;
   background: linear-gradient(
     -45deg,
-    #0a0f2e,
-    #0d1b4b,
-    #0f2460,
-    #1a1040,
-    #0d0a2e,
-    #1a0a3e
+    #a8d8f0,
+    #c4e8f8,
+    #b8d4f5,
+    #d4eaf8,
+    #a0c8e8,
+    #bce0f5
   );
   background-size: 400% 400%;
   animation: gradientShift 12s ease infinite;
@@ -67,7 +67,7 @@
 .auth-page::before {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(29,106,255,0.35) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(29,106,255,0.12) 0%, transparent 70%);
   top: -100px;
   left: -100px;
   animation: orbFloat1 10s ease-in-out infinite;
@@ -76,7 +76,7 @@
 .auth-page::after {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(100,180,255,0.12) 0%, transparent 70%);
   bottom: -80px;
   right: -80px;
   animation: orbFloat2 13s ease-in-out infinite;
@@ -88,7 +88,7 @@
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(147,197,253,0.15) 0%, transparent 70%);
   filter: blur(60px);
   bottom: 20%;
   left: 10%;
@@ -101,10 +101,10 @@
 .auth-card {
   position: relative;
   z-index: 2;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 28px;
   padding: 44px 40px;
   width: 100%;
@@ -123,15 +123,7 @@
   font-size: 26px;
   text-align: center;
   margin-bottom: 6px;
-  /* Shimmer gradient text */
-  background: linear-gradient(
-    90deg,
-    #ffffff 0%,
-    #93c5fd 30%,
-    #ffffff 50%,
-    #a78bfa 70%,
-    #ffffff 100%
-  );
+  background: linear-gradient(90deg, #1D6AFF 0%, #7C3AED 50%, #1D6AFF 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -141,7 +133,7 @@
 
 .auth-tagline {
   text-align: center;
-  color: rgba(255,255,255,0.5);
+  color: #64748B;
   font-size: 13px;
   margin-bottom: 32px;
   letter-spacing: 0.2px;
@@ -166,7 +158,7 @@
   display: block;
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255,255,255,0.8);
+  color: #475569;
   margin-bottom: 6px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -263,15 +255,15 @@
   text-align: center;
   margin-top: 22px;
   font-size: 13px;
-  color: rgba(255,255,255,0.45);
+  color: #64748B;
 }
 .auth-switch a {
-  color: #93c5fd;
+  color: #1D6AFF;
   font-weight: 600;
   text-decoration: none;
   transition: color 150ms;
 }
-.auth-switch a:hover { color: #fff; }
+.auth-switch a:hover { color: #1554D4; }
 
 /* Divider line */
 .auth-divider {
