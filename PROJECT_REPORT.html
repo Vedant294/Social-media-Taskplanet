@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TaskPlanet — Project Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; color: #0f172a; }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #1e3a8a, #1d4ed8, #4f46e5, #7c3aed);
+    background-size: 400% 400%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 60px 40px;
+    page-break-after: always;
+    position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.06) 0%, transparent 50%);
+  }
+  .cover-badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 13px; font-weight: 600;
+    padding: 6px 18px; border-radius: 999px;
+    margin-bottom: 32px; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .cover-logo { font-size: 64px; margin-bottom: 16px; }
+  .cover h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 56px; font-weight: 800;
+    color: #fff; line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .cover-tagline {
+    font-size: 20px; color: rgba(255,255,255,0.75);
+    margin-bottom: 48px; font-weight: 400;
+  }
+  .cover-links {
+    display: flex; flex-direction: column; gap: 14px;
+    align-items: center; position: relative; z-index: 1;
+  }
+  .cover-link {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px; padding: 14px 28px;
+    color: #fff; text-decoration: none;
+    font-size: 15px; font-weight: 600;
+    display: flex; align-items: center; gap: 10px;
+    min-width: 380px; justify-content: flex-start;
+  }
+  .cover-link .link-label {
+    font-size: 11px; color: rgba(255,255,255,0.55);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    display: block; margin-bottom: 2px;
+  }
+  .cover-link .link-url { font-size: 14px; color: #93c5fd; word-break: break-all; }
+  .cover-link .link-icon { font-size: 22px; flex-shrink: 0; }
+  .cover-footer {
+    position: absolute; bottom: 32px;
+    color: rgba(255,255,255,0.4); font-size: 13px;
+  }
+
+  /* ── CONTENT PAGES ── */
+  .page {
+    max-width: 900px; margin: 0 auto;
+    padding: 60px 48px;
+    page-break-after: always;
+  }
+
+  .section-label {
+    font-size: 11px; font-weight: 700;
+    color: #1d6aff; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 32px; font-weight: 800;
+    color: #0f172a; margin-bottom: 24px;
+    line-height: 1.2;
+  }
+  h3 {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px; font-weight: 700;
+    color: #0f172a; margin-bottom: 12px;
+  }
+  p { font-size: 15px; line-height: 1.8; color: #334155; margin-bottom: 16px; }
+
+  /* ── FEATURE GRID ── */
+  .feature-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin: 24px 0;
+  }
+  .feature-card {
+    background: #fff; border: 1px solid #e2e8f0;
+    border-radius: 16px; padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .feature-icon { font-size: 28px; margin-bottom: 10px; }
+  .feature-title { font-weight: 700; font-size: 15px; color: #0f172a; margin-bottom: 6px; }
+  .feature-desc { font-size: 13px; color: #64748b; line-height: 1.6; }
+
+  /* ── TECH STACK ── */
+  .tech-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 14px; margin: 24px 0;
+  }
+  .tech-card {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border: 1px solid #e2e8f0; border-radius: 14px;
+    padding: 18px; text-align: center;
+  }
+  .tech-icon { font-size: 32px; margin-bottom: 8px; }
+  .tech-name { font-weight: 700; font-size: 14px; color: #0f172a; }
+  .tech-role { font-size: 12px; color: #64748b; margin-top: 3px; }
+
+  /* ── API TABLE ── */
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  th {
+    background: #1d6aff; color: #fff;
+    padding: 12px 16px; text-align: left;
+    font-size: 13px; font-weight: 600;
+  }
+  th:first-child { border-radius: 10px 0 0 0; }
+  th:last-child { border-radius: 0 10px 0 0; }
+  td { padding: 11px 16px; font-size: 13px; border-bottom: 1px solid #f1f5f9; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  .method { font-weight: 700; font-family: monospace; }
+  .method.get { color: #10b981; }
+  .method.post { color: #1d6aff; }
+  .method.put { color: #f59e0b; }
+  .method.delete { color: #ef4444; }
+  .badge {
+    display: inline-block; padding: 2px 8px;
+    border-radius: 999px; font-size: 11px; font-weight: 600;
+  }
+  .badge-yes { background: #dcfce7; color: #16a34a; }
+  .badge-no  { background: #f1f5f9; color: #64748b; }
+
+  /* ── ARCHITECTURE ── */
+  .arch-box {
+    background: #0f172a; border-radius: 16px;
+    padding: 28px; margin: 20px 0;
+    font-family: monospace; font-size: 13px;
+    color: #94a3b8; line-height: 2;
+  }
+  .arch-box .highlight { color: #60a5fa; font-weight: 700; }
+  .arch-box .arrow { color: #4ade80; }
+
+  /* ── IMAGE PLACEHOLDER ── */
+  .img-placeholder {
+    background: linear-gradient(135deg, #e0f2fe, #ddd6fe);
+    border: 2px dashed #93c5fd; border-radius: 16px;
+    padding: 40px; text-align: center;
+    color: #64748b; font-size: 14px;
+    margin: 20px 0;
+  }
+  .img-placeholder .img-icon { font-size: 40px; margin-bottom: 10px; }
+
+  /* ── SECURITY ── */
+  .security-list { list-style: none; margin: 16px 0; }
+  .security-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+    font-size: 14px; color: #334155;
+  }
+  .security-list li .check { color: #10b981; font-size: 18px; flex-shrink: 0; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px; background: linear-gradient(90deg, #1d6aff, #7c3aed, transparent);
+    margin: 32px 0; border: none;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { padding: 40px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ COVER PAGE ══════════════ -->
+<div class="cover">
+  <div class="cover-badge">3W Full Stack Internship — Round 1 Task</div>
+  <div class="cover-logo">🌐</div>
+  <h1>TaskPlanet Social</h1>
+  <p class="cover-tagline">Share your world. Connect your story.</p>
+
+  <div class="cover-links">
+    <a class="cover-link" href="https://social-media-taskplanet.vercel.app">
+      <span class="link-icon">🌐</span>
+      <div>
+        <span class="link-label">Frontend (Live)</span>
+        <span class="link-url">https://social-media-taskplanet.vercel.app</span>
+      </div>
+    </a>
+    <a class="cover-link" href="https://github.com/Vedant294/Social-media-Taskplanet">
+      <span class="link-icon">💻</span>
+      <div>
+        <span class="link-label">GitHub Repository (Public)</span>
+        <span class="link-url">https://github.com/Vedant294/Social-media-Taskplanet</span>
+      </div>
+    </a>
+    <a class="cover-link" href="https://socialsphere-api.onrender.com/health">
+      <span class="link-icon">⚙️</span>
+      <div>
+        <span class="link-label">Backend API (Render)</span>
+        <span class="link-url">https://socialsphere-api.onrender.com/api</span>
+      </div>
+    </a>
+    <a class="cover-link" href="https://cloud.mongodb.com">
+      <span class="link-icon">🍃</span>
+      <div>
+        <span class="link-label">Database (MongoDB Atlas)</span>
+        <span class="link-url">cluster0.iqit5sr.mongodb.net / socialsphere</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="cover-footer">Submitted by Vedant · April 2026</div>
+</div>
+
+<!-- ══════════════ PAGE 1 — OVERVIEW ══════════════ -->
+<div class="page">
+  <div class="section-label">Project Overview</div>
+  <h2>What is TaskPlanet Social?</h2>
+  <p>
+    TaskPlanet Social is a production-grade full-stack social posting web application built for the 3W Full Stack Internship Assignment. Inspired by the TaskPlanet app's social feed, it allows users to create accounts, share posts with text and images, interact through likes and comments, and explore a live public feed — all in real time.
+  </p>
+  <p>
+    The application is fully deployed, mobile-responsive, and built with a clean modern UI featuring glassmorphism design, smooth animations, skeleton loading, and optimistic UI updates for an instant feel.
+  </p>
+
+  <hr class="divider"/>
+
+  <div class="section-label">Key Features</div>
+  <h2>Everything That Was Built</h2>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">JWT Authentication</div>
+      <div class="feature-desc">Secure signup & login with bcryptjs password hashing (12 salt rounds). Tokens stored in localStorage with expiry validation on mount.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <div class="feature-title">Create Posts</div>
+      <div class="feature-desc">Post text, images, or both. Images uploaded to Cloudinary CDN with auto-optimization. Neither field is mandatory — either one is enough.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title">Public Feed</div>
+      <div class="feature-desc">Infinite scroll feed showing all posts from all users. Skeleton loading cards for perceived performance. Stagger animation on load.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">❤️</div>
+      <div class="feature-title">Like / Unlike</div>
+      <div class="feature-desc">Toggle likes with instant optimistic UI update. Count updates immediately before API response. Pop animation on like. Stores usernames of likers.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">Comments</div>
+      <div class="feature-desc">Full comment modal with all comments listed. Optimistic append on submit. Live count update. Stores username, name, and avatar of commenter.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-title">Search & Filter</div>
+      <div class="feature-desc">Debounced search (300ms) by post content or username. Filter tabs: All Posts, Most Liked, Most Commented — all server-side sorted.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-title">Trending Sidebar</div>
+      <div class="feature-desc">Trending hashtags panel with click-to-search. Who to Follow suggestions panel. Visible on desktop, hidden on mobile for clean layout.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Fully Responsive</div>
+      <div class="feature-desc">Mobile-first design. Bottom-sheet comment modal on mobile. Touch-friendly 44px tap targets. Tested at 375px, 768px, and 1200px.</div>
+    </div>
+  </div>
+
+  <!-- Screenshot placeholder -->
+  <div class="img-placeholder">
+    <div class="img-icon">📸</div>
+    <strong>Add Screenshot Here</strong><br/>
+    Login / Signup Page Screenshot
+  </div>
+</div>
+
+<!-- ══════════════ PAGE 2 — TECH STACK ══════════════ -->
+<div class="page">
+  <div class="section-label">Technology</div>
+  <h2>Tech Stack</h2>
+
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-icon">⚛️</div>
+      <div class="tech-name">React 18</div>
+      <div class="tech-role">Frontend UI</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">⚡</div>
+      <div class="tech-name">Vite</div>
+      <div class="tech-role">Build Tool</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🅱️</div>
+      <div class="tech-name">React Bootstrap</div>
+      <div class="tech-role">UI Components</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🟢</div>
+      <div class="tech-name">Node.js 20</div>
+      <div class="tech-role">Backend Runtime</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🚂</div>
+      <div class="tech-name">Express 4</div>
+      <div class="tech-role">REST API</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🍃</div>
+      <div class="tech-name">MongoDB Atlas</div>
+      <div class="tech-role">Database</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🔑</div>
+      <div class="tech-name">JWT + bcryptjs</div>
+      <div class="tech-role">Authentication</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">☁️</div>
+      <div class="tech-name">Cloudinary</div>
+      <div class="tech-role">Image CDN</div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🚀</div>
+      <div class="tech-name">Vercel + Render</div>
+      <div class="tech-role">Deployment</div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <div class="section-label">System Design</div>
+  <h2>Architecture</h2>
+
+  <div class="arch-box">
+    <span class="highlight">Browser</span> (React 18 + Vite)<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">│</span><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">│</span> HTTPS REST API (JWT Bearer Token)<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">▼</span><br/>
+    <span class="highlight">Backend</span> (Node.js + Express) — Render.com<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">│</span><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">│</span> Mongoose ODM<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">▼</span><br/>
+    <span class="highlight">Database</span> (MongoDB Atlas M0)<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;Collections: <span style="color:#fbbf24">users</span> · <span style="color:#fbbf24">posts</span><br/>
+    <br/>
+    <span class="highlight">Images</span> → Multer → Cloudinary CDN → secure_url stored in post
+  </div>
+
+  <div class="img-placeholder">
+    <div class="img-icon">📸</div>
+    <strong>Add Screenshot Here</strong><br/>
+    Feed Page Screenshot
+  </div>
+</div>
+
+<!-- ══════════════ PAGE 3 — API ══════════════ -->
+<div class="page">
+  <div class="section-label">Backend</div>
+  <h2>API Endpoints</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Route</th>
+        <th>Auth</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="method post">POST</span></td>
+        <td>/api/auth/signup</td>
+        <td><span class="badge badge-no">Public</span></td>
+        <td>Register new user, returns JWT</td>
+      </tr>
+      <tr>
+        <td><span class="method post">POST</span></td>
+        <td>/api/auth/login</td>
+        <td><span class="badge badge-no">Public</span></td>
+        <td>Login, returns JWT + user object</td>
+      </tr>
+      <tr>
+        <td><span class="method get">GET</span></td>
+        <td>/api/posts</td>
+        <td><span class="badge badge-no">Public</span></td>
+        <td>Paginated feed with filter & search</td>
+      </tr>
+      <tr>
+        <td><span class="method post">POST</span></td>
+        <td>/api/posts</td>
+        <td><span class="badge badge-yes">JWT</span></td>
+        <td>Create post (text + image upload)</td>
+      </tr>
+      <tr>
+        <td><span class="method put">PUT</span></td>
+        <td>/api/posts/:id/like</td>
+        <td><span class="badge badge-yes">JWT</span></td>
+        <td>Toggle like — adds or removes</td>
+      </tr>
+      <tr>
+        <td><span class="method post">POST</span></td>
+        <td>/api/posts/:id/comment</td>
+        <td><span class="badge badge-yes">JWT</span></td>
+        <td>Add comment to post</td>
+      </tr>
+      <tr>
+        <td><span class="method delete">DELETE</span></td>
+        <td>/api/posts/:id</td>
+        <td><span class="badge badge-yes">JWT</span></td>
+        <td>Delete own post (author only)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr class="divider"/>
+
+  <div class="section-label">Database</div>
+  <h2>MongoDB Schema (2 Collections)</h2>
+
+  <h3>Collection 1 — users</h3>
+  <p>Stores name, username (unique), email (unique), hashed password, avatar URL, bio. Password uses <code>select: false</code> — never returned in API responses. Timestamps auto-added.</p>
+
+  <h3>Collection 2 — posts</h3>
+  <p>Stores denormalized author info (no JOIN needed on feed load), post text, Cloudinary image URL, embedded likes array (userId + username), and embedded comments array (full comment object with timestamps). Indexed on <code>createdAt</code> for fast feed sorting.</p>
+
+  <div class="img-placeholder">
+    <div class="img-icon">📸</div>
+    <strong>Add Screenshot Here</strong><br/>
+    MongoDB Atlas Dashboard Screenshot
+  </div>
+</div>
+
+<!-- ══════════════ PAGE 4 — SECURITY & DEPLOYMENT ══════════════ -->
+<div class="page">
+  <div class="section-label">Security</div>
+  <h2>Security Measures</h2>
+
+  <ul class="security-list">
+    <li><span class="check">✅</span> Passwords hashed with bcryptjs — 12 salt rounds, never stored plain</li>
+    <li><span class="check">✅</span> JWT HS256 tokens — 7-day expiry, validated on every protected request</li>
+    <li><span class="check">✅</span> <code>password</code> field has <code>select: false</code> — never accidentally returned</li>
+    <li><span class="check">✅</span> Author-only delete — server checks <code>post.author.userId === req.user._id</code></li>
+    <li><span class="check">✅</span> Rate limiting — 100 requests per 15 minutes per IP</li>
+    <li><span class="check">✅</span> CORS — only whitelisted origins allowed</li>
+    <li><span class="check">✅</span> File upload — images only (mimetype check), max 5MB enforced by Multer</li>
+    <li><span class="check">✅</span> Generic auth errors — doesn't reveal which field is wrong</li>
+    <li><span class="check">✅</span> All secrets in <code>.env</code> — gitignored, <code>.env.example</code> committed</li>
+  </ul>
+
+  <hr class="divider"/>
+
+  <div class="section-label">Deployment</div>
+  <h2>Live Deployment</h2>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">▲</div>
+      <div class="feature-title">Vercel — Frontend</div>
+      <div class="feature-desc">
+        React + Vite app deployed on Vercel.<br/>
+        <strong>URL:</strong> social-media-taskplanet.vercel.app<br/>
+        Auto-deploys on every GitHub push.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Render — Backend</div>
+      <div class="feature-desc">
+        Node.js + Express API on Render free tier.<br/>
+        <strong>URL:</strong> socialsphere-api.onrender.com<br/>
+        Health check at <code>/health</code> endpoint.
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🍃</div>
+      <div class="feature-title">MongoDB Atlas</div>
+      <div class="feature-desc">
+        M0 free cluster on AWS.<br/>
+        <strong>DB:</strong> socialsphere<br/>
+        Collections: users, posts
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">☁️</div>
+      <div class="feature-title">Cloudinary CDN</div>
+      <div class="feature-desc">
+        All post images stored on Cloudinary.<br/>
+        Auto-format + quality optimization.<br/>
+        Max 1200px width, auto WebP conversion.
+      </div>
+    </div>
+  </div>
+
+  <div class="img-placeholder">
+    <div class="img-icon">📸</div>
+    <strong>Add Screenshot Here</strong><br/>
+    Post with Image + Like + Comment Screenshot
+  </div>
+
+  <hr class="divider"/>
+
+  <div style="text-align:center; padding: 20px 0; color: #64748b; font-size: 14px;">
+    <strong style="color:#1d6aff; font-family:'Sora',sans-serif; font-size:18px;">🌐 TaskPlanet Social</strong><br/>
+    Built with ❤️ for 3W Full Stack Internship · April 2026<br/>
+    <strong>Vedant</strong> · github.com/Vedant294
+  </div>
+</div>
+
+</body>
+</html>

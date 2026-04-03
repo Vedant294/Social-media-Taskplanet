@@ -270,3 +270,30 @@
   .auth-card { padding: 28px 20px; border-radius: 20px; }
   .auth-brand { font-size: 22px; }
 }
+
+/* ===== FIELD HINTS & VALIDATION ===== */
+.field-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 5px;
+  padding-left: 2px;
+  line-height: 1.4;
+}
+
+.field-error {
+  font-size: 11px;
+  color: #ef4444;
+  margin-top: 5px;
+  padding-left: 2px;
+  font-weight: 600;
+}
+
+.auth-page .form-control.input-error {
+  border-color: rgba(239,68,68,0.7) !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.12) !important;
+}
+
+.auth-page .form-control.input-success {
+  border-color: rgba(16,185,129,0.6) !important;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.1) !important;
+}

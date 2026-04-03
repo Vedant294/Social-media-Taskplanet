@@ -11,13 +11,47 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const validate = (name, value) => {
+    switch (name) {
+      case 'email':
+        if (!value.trim()) return 'Email is required';
+        if (!/^\S+@\S+\.\S+$/.test(value)) return 'Enter a valid email address';
+        return '';
+      case 'password':
+        if (!value) return 'Password is required';
+        if (value.length < 6) return 'Password must be at least 6 characters';
+        return '';
+      default: return '';
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm(f => ({ ...f, [name]: value }));
+    setFieldErrors(prev => ({ ...prev, [name]: validate(name, value) }));
+    if (error) setError('');
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setFieldErrors(prev => ({ ...prev, [name]: validate(name, value) }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
+    const errors = {};
+    Object.keys(form).forEach(key => {
+      const err = validate(key, form[key]);
+      if (err) errors[key] = err;
+    });
+    setFieldErrors(errors);
+    if (Object.keys(errors).length > 0) return;
+
     setLoading(true);
     try {
       const { data } = await api.post('/auth/login', form);
@@ -25,7 +59,7 @@ export default function Login() {
       toast.success('Welcome back! 👋');
       navigate('/feed');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -39,20 +73,22 @@ export default function Login() {
         <div className="auth-brand">🌐 TaskPlanet</div>
         <p className="auth-tagline">Share your world. Connect your story.</p>
 
-        {error && <div className="auth-error">{error}</div>}
+        {error && <div className="auth-error">⚠ {error}</div>}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="form-group">
             <label>Email</label>
             <input
               type="email"
               name="email"
-              className="form-control"
+              className={`form-control ${fieldErrors.email ? 'input-error' : form.email && !fieldErrors.email ? 'input-success' : ''}`}
               placeholder="you@example.com"
               value={form.email}
               onChange={handleChange}
-              required
+              onBlur={handleBlur}
+              autoComplete="email"
             />
+            {fieldErrors.email && <p className="field-error">⚠ {fieldErrors.email}</p>}
           </div>
 
           <div className="form-group">
@@ -61,20 +97,18 @@ export default function Login() {
               <input
                 type={showPassword ? 'text' : 'password'}
                 name="password"
-                className="form-control"
-                placeholder="Your password"
+                className={`form-control ${fieldErrors.password ? 'input-error' : form.password && !fieldErrors.password ? 'input-success' : ''}`}
+                placeholder="Your password (min 6 chars)"
                 value={form.password}
                 onChange={handleChange}
-                required
+                onBlur={handleBlur}
+                autoComplete="current-password"
               />
-              <button
-                type="button"
-                className="password-toggle"
-                onClick={() => setShowPassword(s => !s)}
-              >
+              <button type="button" className="password-toggle" onClick={() => setShowPassword(s => !s)}>
                 {showPassword ? '🙈' : '👁'}
               </button>
             </div>
+            {fieldErrors.password && <p className="field-error">⚠ {fieldErrors.password}</p>}
           </div>
 
           <button type="submit" className="btn-auth" disabled={loading}>
