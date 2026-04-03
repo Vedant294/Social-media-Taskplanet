@@ -1,0 +1,196 @@
+/* =============================================
+   RESPONSIVE & DEVICE COMPATIBILITY
+   Mobile-first approach
+   xs: 0-575px | sm: 576-767px | md: 768-991px | lg: 992px+
+   ============================================= */
+
+/* ===== DISABLE HEAVY ANIMATIONS ON MOBILE ===== */
+@media (max-width: 768px) {
+  /* Stop background-attachment: fixed (causes flicker on mobile) */
+  .feed-page {
+    background-attachment: scroll !important;
+  }
+
+  /* Reduce/disable card animations on mobile */
+  .post-card {
+    animation: none !important;
+    transition: none !important;
+  }
+  .post-card:hover {
+    transform: none !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+
+  /* Disable hero gradient animation on low-end devices */
+  .hero-banner {
+    animation: none !important;
+    background: linear-gradient(135deg, #1D6AFF, #7C3AED) !important;
+  }
+
+  /* Disable auth gradient animation */
+  .auth-page {
+    animation: none !important;
+    background: linear-gradient(135deg, #0a0f2e, #0f2460, #1a1040) !important;
+  }
+
+  /* Disable canvas particles on mobile (performance) */
+  canvas { display: none !important; }
+
+  /* Disable orb animations */
+  .auth-page::before,
+  .auth-page::after,
+  .auth-orb-extra {
+    display: none !important;
+  }
+}
+
+/* ===== PREVENT OVERSCROLL ON ALL DEVICES ===== */
+html, body {
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+}
+
+/* ===== NAVBAR ===== */
+@media (max-width: 575px) {
+  .navbar-inner { padding: 0 12px; }
+  .navbar-brand-text { font-size: 17px; }
+}
+
+/* ===== HERO BANNER ===== */
+@media (max-width: 767px) {
+  .hero-banner { padding: 20px 0; }
+  .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0 14px;
+  }
+  .hero-greeting { font-size: 18px; }
+  .hero-sub { font-size: 13px; }
+  .hero-stats { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 575px) {
+  .hero-greeting { font-size: 16px; }
+  .hero-stats { padding: 10px 16px; }
+  .hero-stat-num { font-size: 16px; }
+}
+
+/* ===== FEED LAYOUT ===== */
+@media (max-width: 991px) {
+  .feed-layout {
+    grid-template-columns: 1fr;
+    padding: 14px 12px;
+    gap: 14px;
+  }
+  .feed-sidebar { display: none; }
+}
+
+@media (max-width: 575px) {
+  .feed-layout { padding: 10px 8px; gap: 10px; }
+}
+
+/* ===== POST CARD ===== */
+@media (max-width: 575px) {
+  .post-card {
+    padding: 14px;
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+  }
+  .post-author-name { font-size: 14px; }
+  .post-author-meta { font-size: 11px; }
+  .post-text { font-size: 14px; }
+  .action-btn { padding: 5px 10px; font-size: 13px; }
+  .follow-btn { display: none; }
+}
+
+/* ===== CREATE POST ===== */
+@media (max-width: 575px) {
+  .create-post-card { padding: 12px; border-radius: var(--radius-md); }
+  .create-post-input { font-size: 14px; padding: 8px 10px; }
+  .tool-btn { padding: 5px 10px; font-size: 12px; }
+  .btn-post { padding: 7px 16px; font-size: 13px; }
+}
+
+/* ===== SEARCH BAR ===== */
+@media (max-width: 575px) {
+  .search-input { font-size: 13px; padding: 9px 32px; }
+}
+
+/* ===== FILTER TABS ===== */
+@media (max-width: 575px) {
+  .filter-tab { padding: 6px 12px; font-size: 12px; }
+}
+
+/* ===== AUTH PAGES ===== */
+@media (max-width: 575px) {
+  .auth-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+    margin: 8px;
+  }
+  .auth-brand { font-size: 20px; }
+  .auth-tagline { font-size: 12px; margin-bottom: 22px; }
+  .btn-auth { padding: 11px; font-size: 14px; }
+  .form-group { margin-bottom: 12px; }
+}
+
+/* ===== COMMENT MODAL ===== */
+@media (max-width: 575px) {
+  .comment-modal .modal-dialog {
+    margin: 0;
+    max-width: 100%;
+    align-items: flex-end;
+  }
+  .comment-modal .modal-content {
+    border-radius: 20px 20px 0 0;
+    max-height: 90vh;
+  }
+  .comment-modal-body { max-height: 55vh; }
+  .comment-input { font-size: 13px; }
+}
+
+/* ===== SKELETON CARD ===== */
+@media (max-width: 575px) {
+  .skeleton-card { padding: 14px; border-radius: var(--radius-md); }
+}
+
+/* ===== TOUCH TARGETS (min 44x44px) ===== */
+@media (max-width: 768px) {
+  .action-btn,
+  .btn-post,
+  .btn-auth,
+  .filter-tab,
+  .tool-btn,
+  .follow-btn,
+  .suggestion-follow-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Larger tap area for like/comment */
+  .action-btn { min-width: 64px; }
+}
+
+/* ===== TABLET (768-991px) ===== */
+@media (min-width: 768px) and (max-width: 991px) {
+  .feed-layout { max-width: 680px; margin: 0 auto; }
+  .post-card { padding: 16px; }
+}
+
+/* ===== LARGE DESKTOP (1200px+) ===== */
+@media (min-width: 1200px) {
+  .feed-layout { max-width: 1140px; }
+  .feed-sidebar { width: 320px; }
+}
+
+/* ===== REDUCE MOTION (accessibility) ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
