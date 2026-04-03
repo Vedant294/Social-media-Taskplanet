@@ -43,15 +43,16 @@
   overscroll-behavior: none;
   background: linear-gradient(
     -45deg,
-    #a8d8f0,
-    #c4e8f8,
-    #b8d4f5,
-    #d4eaf8,
-    #a0c8e8,
-    #bce0f5
+    #e0f2fe,
+    #bae6fd,
+    #ddd6fe,
+    #e0e7ff,
+    #bfdbfe,
+    #c7d2fe,
+    #e0f2fe
   );
   background-size: 400% 400%;
-  animation: gradientShift 12s ease infinite;
+  animation: gradientShift 8s ease infinite;
 }
 
 /* Gradient orbs */
@@ -65,33 +66,33 @@
 }
 
 .auth-page::before {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(29,106,255,0.12) 0%, transparent 70%);
-  top: -100px;
-  left: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(99,179,237,0.45) 0%, rgba(147,197,253,0.2) 50%, transparent 70%);
+  top: -150px;
+  left: -150px;
   animation: orbFloat1 10s ease-in-out infinite;
 }
 
 .auth-page::after {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(100,180,255,0.12) 0%, transparent 70%);
-  bottom: -80px;
-  right: -80px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(167,139,250,0.35) 0%, rgba(196,181,253,0.15) 50%, transparent 70%);
+  bottom: -100px;
+  right: -100px;
   animation: orbFloat2 13s ease-in-out infinite;
 }
 
-/* Extra orb via wrapper */
+/* Extra orbs */
 .auth-orb-extra {
   position: fixed;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(147,197,253,0.15) 0%, transparent 70%);
-  filter: blur(60px);
-  bottom: 20%;
-  left: 10%;
+  background: radial-gradient(circle, rgba(56,189,248,0.3) 0%, rgba(125,211,252,0.1) 50%, transparent 70%);
+  filter: blur(70px);
+  bottom: 15%;
+  left: 5%;
   animation: orbFloat3 9s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
@@ -110,9 +111,9 @@
   width: 100%;
   max-width: 440px;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255,255,255,0.05) inset,
-    0 1px 0 rgba(255,255,255,0.15) inset;
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255,255,255,0.6) inset,
+    0 1px 0 rgba(255,255,255,0.9) inset;
   animation: cardEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
@@ -141,9 +142,9 @@
 
 /* Error */
 .auth-error {
-  background: rgba(239,68,68,0.15);
-  border: 1px solid rgba(239,68,68,0.35);
-  color: #fca5a5;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #dc2626;
   border-radius: 12px;
   padding: 10px 14px;
   font-size: 13px;
@@ -183,7 +184,7 @@
 .auth-page .form-control:focus {
   outline: none !important;
   border-color: rgba(29,106,255,0.8) !important;
-  box-shadow: 0 0 0 3px rgba(29,106,255,0.25) !important;
+  box-shadow: 0 0 0 3px rgba(29,106,255,0.15) !important;
   background: #ffffff !important;
 }
 .auth-page .form-control::placeholder {
@@ -191,7 +192,7 @@
   -webkit-text-fill-color: #94a3b8 !important;
 }
 
-/* Autofill — keep light style */
+/* Autofill */
 .auth-page .form-control:-webkit-autofill,
 .auth-page .form-control:-webkit-autofill:hover,
 .auth-page .form-control:-webkit-autofill:focus,
@@ -233,7 +234,7 @@
   font-weight: 700;
   font-family: 'Plus Jakarta Sans', sans-serif;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(29,106,255,0.45);
+  box-shadow: 0 4px 20px rgba(29,106,255,0.35);
   transition: all 200ms ease;
   margin-top: 8px;
   display: flex;
@@ -244,8 +245,8 @@
 }
 .btn-auth:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(29,106,255,0.55);
-  filter: brightness(1.1);
+  box-shadow: 0 8px 28px rgba(29,106,255,0.45);
+  filter: brightness(1.08);
 }
 .btn-auth:active { transform: scale(0.98); }
 .btn-auth:disabled { opacity: 0.55; cursor: not-allowed; }
@@ -264,25 +265,6 @@
   transition: color 150ms;
 }
 .auth-switch a:hover { color: #1554D4; }
-
-/* Divider line */
-.auth-divider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0;
-}
-.auth-divider::before,
-.auth-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(255,255,255,0.1);
-}
-.auth-divider span {
-  font-size: 12px;
-  color: rgba(255,255,255,0.3);
-}
 
 @media (max-width: 480px) {
   .auth-card { padding: 28px 20px; border-radius: 20px; }
