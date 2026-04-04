@@ -9,7 +9,7 @@
 
 | | URL |
 |---|---|
-| 🌐 **Frontend** | https://social-media-taskplanet.vercel.app |
+| 🌐 **Frontend** | https://social-media-taskplanet.vercel.app/login |
 | ⚙️ **Backend API** | https://socialsphere-api.onrender.com/api |
 | 💓 **Health Check** | https://socialsphere-api.onrender.com/health |
 
