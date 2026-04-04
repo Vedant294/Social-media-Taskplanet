@@ -18,19 +18,32 @@ export default function Login() {
   const doLogin = async (credentials) => {
     setError('');
     setLoading(true);
-    try {
-      const { data } = await api.post('/auth/login', {
-        email: credentials.email.trim().toLowerCase(),
-        password: credentials.password,
-      });
-      login(data);
-      toast.success('Welcome back! 👋');
-      navigate('/feed');
-    } catch (err) {
-      setError(err.response?.data?.message || 'Invalid email or password');
-    } finally {
-      setLoading(false);
+    // Retry up to 3 times to handle Render cold start (~50s wake up)
+    let attempts = 0;
+    while (attempts < 3) {
+      try {
+        const { data } = await api.post('/auth/login', {
+          email: credentials.email.trim().toLowerCase(),
+          password: credentials.password,
+        });
+        login(data);
+        toast.success('Welcome back! 👋');
+        navigate('/feed');
+        return;
+      } catch (err) {
+        attempts++;
+        if (err.code === 'ERR_NETWORK' || err.response?.status >= 500) {
+          if (attempts < 3) {
+            setError('Server is waking up... retrying (' + attempts + '/3)');
+            await new Promise(r => setTimeout(r, 5000));
+            continue;
+          }
+        }
+        setError(err.response?.data?.message || 'Invalid email or password');
+        break;
+      }
     }
+    setLoading(false);
   };
 
   const handleSubmit = (e) => {
@@ -98,7 +111,8 @@ export default function Login() {
           disabled={loading}
           onClick={() => doLogin(DEMO)}
         >
-          ⚡ Try Demo Account
+          {loading ? <span className="spinner-border spinner-border-sm me-2" /> : '⚡ '}
+          {loading ? 'Connecting...' : 'Try Demo Account'}
         </button>
         <p className="demo-hint">email: alex@demo.com &nbsp;·&nbsp; password: demo1234</p>
 

@@ -38,4 +38,19 @@ app.get('/health', (req, res) =>
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+
+  // Keep-alive ping every 10 minutes to prevent Render free tier spin-down
+  if (process.env.NODE_ENV === 'production' && process.env.RENDER_EXTERNAL_URL) {
+    setInterval(async () => {
+      try {
+        const url = `${process.env.RENDER_EXTERNAL_URL}/health`;
+        const res = await fetch(url);
+        console.log(`💓 Keep-alive ping: ${res.status}`);
+      } catch (e) {
+        console.log('💓 Keep-alive ping failed:', e.message);
+      }
+    }, 10 * 60 * 1000); // every 10 minutes
+  }
+});
