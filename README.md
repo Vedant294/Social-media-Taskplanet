@@ -15,7 +15,7 @@
 
 > **Demo Account:** `alex@demo.com` / `demo1234`
 
----
+**Live Apk** : https://github.com/Vedant294/Social-media-Taskplanet/blob/main/app-release.apk 
 
 ## ✨ Features
 
